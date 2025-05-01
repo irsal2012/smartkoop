@@ -33,7 +33,7 @@ run_both() {
   
   # Start the frontend server
   echo "Starting frontend server..."
-  cd ../frontend && ./run.sh
+  cd frontend && ./run.sh
   
   # When the frontend server is stopped, also stop the backend server
   kill $BACKEND_PID
