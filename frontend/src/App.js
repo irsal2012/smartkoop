@@ -37,9 +37,9 @@ import SupplierDetail from './pages/suppliers/SupplierDetail';
 import SupplierForm from './pages/suppliers/SupplierForm';
 
 // Purchase pages
-// import PurchaseOrderList from './pages/purchases/PurchaseOrderList';
-// import PurchaseOrderDetail from './pages/purchases/PurchaseOrderDetail';
-// import PurchaseOrderForm from './pages/purchases/PurchaseOrderForm';
+import PurchaseOrderList from './pages/purchases/PurchaseOrderList';
+import PurchaseOrderDetail from './pages/purchases/PurchaseOrderDetail';
+import PurchaseOrderForm from './pages/purchases/PurchaseOrderForm';
 
 // Asset pages
 // import AssetList from './pages/assets/AssetList';
@@ -123,10 +123,10 @@ function App() {
             <Route path="/suppliers/:id/edit" element={<SupplierForm />} />
             
             {/* Purchase routes */}
-            {/* <Route path="/purchases/orders" element={<PurchaseOrderList />} /> */}
-            {/* <Route path="/purchases/orders/new" element={<PurchaseOrderForm />} /> */}
-            {/* <Route path="/purchases/orders/:id" element={<PurchaseOrderDetail />} /> */}
-            {/* <Route path="/purchases/orders/:id/edit" element={<PurchaseOrderForm />} /> */}
+            <Route path="/purchases/orders" element={<PurchaseOrderList />} />
+            <Route path="/purchases/orders/new" element={<PurchaseOrderForm />} />
+            <Route path="/purchases/orders/:id" element={<PurchaseOrderDetail />} />
+            <Route path="/purchases/orders/:id/edit" element={<PurchaseOrderForm />} />
             
             {/* Asset routes */}
             {/* <Route path="/assets" element={<AssetList />} /> */}
