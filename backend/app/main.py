@@ -26,7 +26,7 @@ os.makedirs(settings.UPLOAD_DIRECTORY, exist_ok=True)
 # Root endpoint
 @app.get("/")
 async def root():
-    return {"message": "Welcome to SmartCoop System API"}
+    return {"message": "Welcome to SmartKoop System API"}
 
 # Health check endpoint
 @app.get("/health")

@@ -42,7 +42,7 @@ const AuthLayout = () => {
             align="center"
             sx={{ mb: 4, fontWeight: 'bold', color: theme.palette.primary.main }}
           >
-            SmartCoop System
+            SmartKoop System
           </Typography>
           
           {/* This is where the child routes (Login, Register, etc.) will be rendered */}

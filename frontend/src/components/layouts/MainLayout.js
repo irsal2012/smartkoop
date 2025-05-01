@@ -83,7 +83,7 @@ const MainLayout = () => {
     <div>
       <Toolbar>
         <Typography variant="h6" noWrap component="div">
-          SmartCoop
+          SmartKoop
         </Typography>
       </Toolbar>
       <Divider />
@@ -125,7 +125,7 @@ const MainLayout = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-            SmartCoop System
+            SmartKoop System
           </Typography>
           
           {/* Profile Menu */}
