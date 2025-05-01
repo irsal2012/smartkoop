@@ -42,9 +42,9 @@ import PurchaseOrderDetail from './pages/purchases/PurchaseOrderDetail';
 import PurchaseOrderForm from './pages/purchases/PurchaseOrderForm';
 
 // Asset pages
-// import AssetList from './pages/assets/AssetList';
-// import AssetDetail from './pages/assets/AssetDetail';
-// import AssetForm from './pages/assets/AssetForm';
+import AssetList from './pages/assets/AssetList';
+import AssetDetail from './pages/assets/AssetDetail';
+import AssetForm from './pages/assets/AssetForm';
 
 // Accounting pages
 // import JournalEntryList from './pages/accounting/JournalEntryList';
@@ -129,10 +129,10 @@ function App() {
             <Route path="/purchases/orders/:id/edit" element={<PurchaseOrderForm />} />
             
             {/* Asset routes */}
-            {/* <Route path="/assets" element={<AssetList />} /> */}
-            {/* <Route path="/assets/new" element={<AssetForm />} /> */}
-            {/* <Route path="/assets/:id" element={<AssetDetail />} /> */}
-            {/* <Route path="/assets/:id/edit" element={<AssetForm />} /> */}
+            <Route path="/assets" element={<AssetList />} />
+            <Route path="/assets/new" element={<AssetForm />} />
+            <Route path="/assets/:id" element={<AssetDetail />} />
+            <Route path="/assets/:id/edit" element={<AssetForm />} />
             
             {/* Accounting routes */}
             {/* <Route path="/accounting/journal" element={<JournalEntryList />} /> */}
