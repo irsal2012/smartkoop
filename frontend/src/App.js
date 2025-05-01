@@ -26,9 +26,9 @@ import CustomerDetail from './pages/customers/CustomerDetail';
 import CustomerForm from './pages/customers/CustomerForm';
 
 // Sales pages
-// import SalesOrderList from './pages/sales/SalesOrderList';
-// import SalesOrderDetail from './pages/sales/SalesOrderDetail';
-// import SalesOrderForm from './pages/sales/SalesOrderForm';
+import SalesOrderList from './pages/sales/SalesOrderList';
+import SalesOrderDetail from './pages/sales/SalesOrderDetail';
+import SalesOrderForm from './pages/sales/SalesOrderForm';
 // import SalesInvoiceList from './pages/sales/SalesInvoiceList';
 
 // Supplier pages
@@ -110,10 +110,10 @@ function App() {
             <Route path="/customers/:id/edit" element={<CustomerForm />} />
             
             {/* Sales routes */}
-            {/* <Route path="/sales/orders" element={<SalesOrderList />} /> */}
-            {/* <Route path="/sales/orders/new" element={<SalesOrderForm />} /> */}
-            {/* <Route path="/sales/orders/:id" element={<SalesOrderDetail />} /> */}
-            {/* <Route path="/sales/orders/:id/edit" element={<SalesOrderForm />} /> */}
+            <Route path="/sales/orders" element={<SalesOrderList />} />
+            <Route path="/sales/orders/new" element={<SalesOrderForm />} />
+            <Route path="/sales/orders/:id" element={<SalesOrderDetail />} />
+            <Route path="/sales/orders/:id/edit" element={<SalesOrderForm />} />
             {/* <Route path="/sales/invoices" element={<SalesInvoiceList />} /> */}
             
             {/* Supplier routes */}
