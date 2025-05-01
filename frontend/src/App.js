@@ -20,11 +20,10 @@ import MemberList from './pages/members/MemberList';
 import MemberDetail from './pages/members/MemberDetail';
 import MemberForm from './pages/members/MemberForm';
 
-// The following pages don't exist yet
 // Customer pages
-// import CustomerList from './pages/customers/CustomerList';
-// import CustomerDetail from './pages/customers/CustomerDetail';
-// import CustomerForm from './pages/customers/CustomerForm';
+import CustomerList from './pages/customers/CustomerList';
+import CustomerDetail from './pages/customers/CustomerDetail';
+import CustomerForm from './pages/customers/CustomerForm';
 
 // Sales pages
 // import SalesOrderList from './pages/sales/SalesOrderList';
@@ -105,10 +104,10 @@ function App() {
             {/* The following routes are commented out because the components don't exist yet */}
             
             {/* Customer routes */}
-            {/* <Route path="/customers" element={<CustomerList />} /> */}
-            {/* <Route path="/customers/new" element={<CustomerForm />} /> */}
-            {/* <Route path="/customers/:id" element={<CustomerDetail />} /> */}
-            {/* <Route path="/customers/:id/edit" element={<CustomerForm />} /> */}
+            <Route path="/customers" element={<CustomerList />} />
+            <Route path="/customers/new" element={<CustomerForm />} />
+            <Route path="/customers/:id" element={<CustomerDetail />} />
+            <Route path="/customers/:id/edit" element={<CustomerForm />} />
             
             {/* Sales routes */}
             {/* <Route path="/sales/orders" element={<SalesOrderList />} /> */}

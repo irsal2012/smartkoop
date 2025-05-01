@@ -1,14 +1,14 @@
 from fastapi import APIRouter
 
-from app.api.api_v1.endpoints import members
+from app.api.api_v1.endpoints import members, customers
 # Import other endpoint modules as they are created
-# from app.api.api_v1.endpoints import customers, sales, suppliers, purchases, assets, accounting, documents, auth
+# from app.api.api_v1.endpoints import sales, suppliers, purchases, assets, accounting, documents, auth
 
 api_router = APIRouter()
 
 # Include routers for different endpoints
 api_router.include_router(members.router, prefix="/members", tags=["members"])
-# api_router.include_router(customers.router, prefix="/customers", tags=["customers"])
+api_router.include_router(customers.router, prefix="/customers", tags=["customers"])
 # api_router.include_router(sales.router, prefix="/sales", tags=["sales"])
 # api_router.include_router(suppliers.router, prefix="/suppliers", tags=["suppliers"])
 # api_router.include_router(purchases.router, prefix="/purchases", tags=["purchases"])
