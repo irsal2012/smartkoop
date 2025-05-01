@@ -32,9 +32,9 @@ import SalesOrderForm from './pages/sales/SalesOrderForm';
 // import SalesInvoiceList from './pages/sales/SalesInvoiceList';
 
 // Supplier pages
-// import SupplierList from './pages/suppliers/SupplierList';
-// import SupplierDetail from './pages/suppliers/SupplierDetail';
-// import SupplierForm from './pages/suppliers/SupplierForm';
+import SupplierList from './pages/suppliers/SupplierList';
+import SupplierDetail from './pages/suppliers/SupplierDetail';
+import SupplierForm from './pages/suppliers/SupplierForm';
 
 // Purchase pages
 // import PurchaseOrderList from './pages/purchases/PurchaseOrderList';
@@ -117,10 +117,10 @@ function App() {
             {/* <Route path="/sales/invoices" element={<SalesInvoiceList />} /> */}
             
             {/* Supplier routes */}
-            {/* <Route path="/suppliers" element={<SupplierList />} /> */}
-            {/* <Route path="/suppliers/new" element={<SupplierForm />} /> */}
-            {/* <Route path="/suppliers/:id" element={<SupplierDetail />} /> */}
-            {/* <Route path="/suppliers/:id/edit" element={<SupplierForm />} /> */}
+            <Route path="/suppliers" element={<SupplierList />} />
+            <Route path="/suppliers/new" element={<SupplierForm />} />
+            <Route path="/suppliers/:id" element={<SupplierDetail />} />
+            <Route path="/suppliers/:id/edit" element={<SupplierForm />} />
             
             {/* Purchase routes */}
             {/* <Route path="/purchases/orders" element={<PurchaseOrderList />} /> */}
