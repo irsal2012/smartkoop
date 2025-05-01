@@ -47,10 +47,10 @@ import AssetDetail from './pages/assets/AssetDetail';
 import AssetForm from './pages/assets/AssetForm';
 
 // Accounting pages
-// import JournalEntryList from './pages/accounting/JournalEntryList';
-// import JournalEntryForm from './pages/accounting/JournalEntryForm';
-// import ChartOfAccounts from './pages/accounting/ChartOfAccounts';
-// import FinancialReports from './pages/accounting/FinancialReports';
+import JournalEntryList from './pages/accounting/JournalEntryList';
+import JournalEntryForm from './pages/accounting/JournalEntryForm';
+import ChartOfAccounts from './pages/accounting/ChartOfAccounts';
+import FinancialReports from './pages/accounting/FinancialReports';
 
 // Document pages
 // import DocumentList from './pages/documents/DocumentList';
@@ -135,10 +135,12 @@ function App() {
             <Route path="/assets/:id/edit" element={<AssetForm />} />
             
             {/* Accounting routes */}
-            {/* <Route path="/accounting/journal" element={<JournalEntryList />} /> */}
-            {/* <Route path="/accounting/journal/new" element={<JournalEntryForm />} /> */}
-            {/* <Route path="/accounting/chart-of-accounts" element={<ChartOfAccounts />} /> */}
-            {/* <Route path="/accounting/reports" element={<FinancialReports />} /> */}
+            <Route path="/accounting/journal" element={<JournalEntryList />} />
+            <Route path="/accounting/journal/new" element={<JournalEntryForm />} />
+            <Route path="/accounting/journal/:id" element={<JournalEntryForm />} />
+            <Route path="/accounting/journal/:id/edit" element={<JournalEntryForm />} />
+            <Route path="/accounting/chart-of-accounts" element={<ChartOfAccounts />} />
+            <Route path="/accounting/reports" element={<FinancialReports />} />
             
             {/* Document routes */}
             {/* <Route path="/documents" element={<DocumentList />} /> */}
