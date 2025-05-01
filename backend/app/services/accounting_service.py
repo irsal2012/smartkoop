@@ -15,7 +15,7 @@ from app.schemas.accounting import (
     PayrollItemCreate, PayrollItemUpdate,
     EmployeeCreate, EmployeeUpdate
 )
-from app.utils.id_generator import generate_id
+from app.utils.id_generator import generate_journal_entry_number
 
 class AccountingService:
     # Chart of Accounts methods
@@ -88,7 +88,7 @@ class AccountingService:
         # If entry_number is not provided, generate one
         if not entry.entry_number:
             entry_dict = entry.dict()
-            entry_dict["entry_number"] = generate_id(db, "JE")
+            entry_dict["entry_number"] = generate_journal_entry_number(db)
             db_entry = JournalEntry(**entry_dict)
         else:
             db_entry = JournalEntry(**entry.dict())

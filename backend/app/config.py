@@ -1,6 +1,6 @@
 import os
-from pydantic_settings import BaseSettings
-from typing import Optional
+from pydantic import BaseSettings
+from typing import Optional, List
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -20,7 +20,7 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     
     # CORS settings
-    BACKEND_CORS_ORIGINS: list = ["http://localhost:3000", "http://localhost:8000"]
+    BACKEND_CORS_ORIGINS: List[str] = ["http://localhost:3000", "http://localhost:8000"]
     
     # File storage
     UPLOAD_DIRECTORY: str = os.getenv("UPLOAD_DIRECTORY", "./uploads")
