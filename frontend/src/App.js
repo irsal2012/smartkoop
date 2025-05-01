@@ -53,9 +53,9 @@ import ChartOfAccounts from './pages/accounting/ChartOfAccounts';
 import FinancialReports from './pages/accounting/FinancialReports';
 
 // Document pages
-// import DocumentList from './pages/documents/DocumentList';
-// import DocumentDetail from './pages/documents/DocumentDetail';
-// import DocumentUpload from './pages/documents/DocumentUpload';
+import DocumentList from './pages/documents/DocumentList';
+import DocumentDetail from './pages/documents/DocumentDetail';
+import DocumentUpload from './pages/documents/DocumentUpload';
 
 // Auth context
 import { AuthProvider } from './context/AuthContext';
@@ -143,9 +143,10 @@ function App() {
             <Route path="/accounting/reports" element={<FinancialReports />} />
             
             {/* Document routes */}
-            {/* <Route path="/documents" element={<DocumentList />} /> */}
-            {/* <Route path="/documents/upload" element={<DocumentUpload />} /> */}
-            {/* <Route path="/documents/:id" element={<DocumentDetail />} /> */}
+            <Route path="/documents" element={<DocumentList />} />
+            <Route path="/documents/upload" element={<DocumentUpload />} />
+            <Route path="/documents/:id" element={<DocumentDetail />} />
+            <Route path="/documents/:id/edit" element={<DocumentUpload />} />
           </Route>
           
           {/* Fallback route */}
