@@ -29,8 +29,8 @@ router = APIRouter()
 # Project endpoints
 @router.get("/", response_model=List[ProjectSchema])
 def get_projects(
-    skip: int = Query(0, description="Skip the first n items"),
-    limit: int = Query(100, description="Limit the number of items returned"),
+    skip: Optional[int] = Query(0, description="Skip the first n items", ge=0),
+    limit: Optional[int] = Query(100, description="Limit the number of items returned", ge=1, le=100),
     db: Session = Depends(get_db)
 ):
     """Get all projects with pagination"""
@@ -265,7 +265,17 @@ def delete_time_entry(
         )
     return success
 
-# Project Invoice endpoints
+# Project Invoice endpoints - All Invoices
+@router.get("/invoices/all", response_model=List[ProjectInvoiceSchema])
+def get_all_invoices(
+    skip: Optional[int] = Query(0, description="Skip the first n items", ge=0),
+    limit: Optional[int] = Query(100, description="Limit the number of items returned", ge=1, le=100),
+    db: Session = Depends(get_db)
+):
+    """Get all project invoices with pagination"""
+    invoices = ProjectService.get_all_invoices(db, skip=skip, limit=limit)
+    return invoices
+
 @router.get("/{project_id}/invoices", response_model=List[ProjectInvoiceSchema])
 def get_project_invoices(
     project_id: int = Path(..., description="The ID of the project to get invoices for"),
@@ -314,16 +324,6 @@ def create_project_invoice(
             )
     
     return ProjectService.create_project_invoice(db, invoice)
-
-@router.get("/invoices", response_model=List[ProjectInvoiceSchema])
-def get_all_invoices(
-    skip: int = Query(0, description="Skip the first n items"),
-    limit: int = Query(100, description="Limit the number of items returned"),
-    db: Session = Depends(get_db)
-):
-    """Get all project invoices with pagination"""
-    invoices = ProjectService.get_all_invoices(db, skip=skip, limit=limit)
-    return invoices
 
 @router.get("/invoices/{invoice_id}", response_model=ProjectInvoiceSchema)
 def get_project_invoice(

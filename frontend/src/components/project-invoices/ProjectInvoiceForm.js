@@ -78,9 +78,10 @@ const ProjectInvoiceForm = () => {
         setError(null);
         setSuccess(null);
         
-        // Convert dates to ISO strings
+        // Convert dates to ISO strings and ensure project_id is a number
         const formattedValues = {
           ...values,
+          project_id: Number(values.project_id), // Ensure project_id is a number
           invoice_date: values.invoice_date.toISOString().split('T')[0],
           due_date: values.due_date ? values.due_date.toISOString().split('T')[0] : null,
         };
@@ -93,7 +94,7 @@ const ProjectInvoiceForm = () => {
           setSuccess('Invoice updated successfully');
         } else {
           // Create new invoice
-          savedInvoice = await projectService.createProjectInvoice(values.project_id, formattedValues);
+          savedInvoice = await projectService.createProjectInvoice(formattedValues.project_id, formattedValues);
           setSuccess('Invoice created successfully');
         }
         

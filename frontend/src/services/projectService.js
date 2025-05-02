@@ -84,9 +84,11 @@ const projectService = {
 
   createProjectTask: async (projectId, taskData) => {
     try {
-      const response = await api.post(`/projects/${projectId}/tasks`, {
+      // Ensure project_id is a number and matches the path parameter
+      const projectIdNum = Number(projectId);
+      const response = await api.post(`/projects/${projectIdNum}/tasks`, {
         ...taskData,
-        project_id: projectId
+        project_id: projectIdNum
       });
       return response.data;
     } catch (error) {
@@ -140,9 +142,11 @@ const projectService = {
 
   createTimeEntry: async (taskId, entryData) => {
     try {
-      const response = await api.post(`/projects/tasks/${taskId}/time-entries`, {
+      // Ensure task_id is a number and matches the path parameter
+      const taskIdNum = Number(taskId);
+      const response = await api.post(`/projects/tasks/${taskIdNum}/time-entries`, {
         ...entryData,
-        task_id: taskId
+        task_id: taskIdNum
       });
       return response.data;
     } catch (error) {
@@ -186,7 +190,7 @@ const projectService = {
 
   getAllInvoices: async (skip = 0, limit = 100) => {
     try {
-      const response = await api.get(`/projects/invoices?skip=${skip}&limit=${limit}`);
+      const response = await api.get(`/projects/invoices/all?skip=${skip}&limit=${limit}`);
       return response.data;
     } catch (error) {
       console.error('Error fetching all project invoices:', error);
@@ -206,9 +210,11 @@ const projectService = {
 
   createProjectInvoice: async (projectId, invoiceData) => {
     try {
-      const response = await api.post(`/projects/${projectId}/invoices`, {
+      // Ensure project_id is a number and matches the path parameter
+      const projectIdNum = Number(projectId);
+      const response = await api.post(`/projects/${projectIdNum}/invoices`, {
         ...invoiceData,
-        project_id: projectId
+        project_id: projectIdNum
       });
       return response.data;
     } catch (error) {
@@ -262,9 +268,11 @@ const projectService = {
 
   createInvoiceItem: async (invoiceId, itemData) => {
     try {
-      const response = await api.post(`/projects/invoices/${invoiceId}/items`, {
+      // Ensure invoice_id is a number and matches the path parameter
+      const invoiceIdNum = Number(invoiceId);
+      const response = await api.post(`/projects/invoices/${invoiceIdNum}/items`, {
         ...itemData,
-        invoice_id: invoiceId
+        invoice_id: invoiceIdNum
       });
       return response.data;
     } catch (error) {
@@ -318,9 +326,11 @@ const projectService = {
 
   createPayment: async (invoiceId, paymentData) => {
     try {
-      const response = await api.post(`/projects/invoices/${invoiceId}/payments`, {
+      // Ensure invoice_id is a number and matches the path parameter
+      const invoiceIdNum = Number(invoiceId);
+      const response = await api.post(`/projects/invoices/${invoiceIdNum}/payments`, {
         ...paymentData,
-        invoice_id: invoiceId
+        invoice_id: invoiceIdNum
       });
       return response.data;
     } catch (error) {

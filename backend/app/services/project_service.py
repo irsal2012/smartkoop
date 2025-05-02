@@ -1,5 +1,5 @@
 from typing import List, Optional, Dict, Any
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 from datetime import date
 from decimal import Decimal
 
@@ -197,22 +197,43 @@ class ProjectService:
     @staticmethod
     def get_project_invoices(db: Session, project_id: int) -> List[ProjectInvoice]:
         """Get all invoices for a project"""
-        return db.query(ProjectInvoice).filter(ProjectInvoice.project_id == project_id).all()
+        return db.query(ProjectInvoice).filter(ProjectInvoice.project_id == project_id).options(
+            # Explicitly join the project relationship
+            joinedload(ProjectInvoice.project).joinedload(Project.customer),
+            # Also load items and payments
+            joinedload(ProjectInvoice.items),
+            joinedload(ProjectInvoice.payments)
+        ).all()
     
     @staticmethod
     def get_all_invoices(db: Session, skip: int = 0, limit: int = 100) -> List[ProjectInvoice]:
         """Get all project invoices with pagination"""
-        return db.query(ProjectInvoice).offset(skip).limit(limit).all()
+        return db.query(ProjectInvoice).options(
+            # Explicitly join the project relationship
+            joinedload(ProjectInvoice.project).joinedload(Project.customer)
+        ).offset(skip).limit(limit).all()
     
     @staticmethod
     def get_project_invoice(db: Session, invoice_id: int) -> Optional[ProjectInvoice]:
         """Get a single project invoice by ID"""
-        return db.query(ProjectInvoice).filter(ProjectInvoice.id == invoice_id).first()
+        return db.query(ProjectInvoice).filter(ProjectInvoice.id == invoice_id).options(
+            # Explicitly join the project relationship
+            joinedload(ProjectInvoice.project).joinedload(Project.customer),
+            # Also load items and payments
+            joinedload(ProjectInvoice.items),
+            joinedload(ProjectInvoice.payments)
+        ).first()
     
     @staticmethod
     def get_invoice_by_number(db: Session, invoice_number: str) -> Optional[ProjectInvoice]:
         """Get a single project invoice by invoice number"""
-        return db.query(ProjectInvoice).filter(ProjectInvoice.invoice_number == invoice_number).first()
+        return db.query(ProjectInvoice).filter(ProjectInvoice.invoice_number == invoice_number).options(
+            # Explicitly join the project relationship
+            joinedload(ProjectInvoice.project).joinedload(Project.customer),
+            # Also load items and payments
+            joinedload(ProjectInvoice.items),
+            joinedload(ProjectInvoice.payments)
+        ).first()
     
     @staticmethod
     def create_project_invoice(db: Session, invoice: ProjectInvoiceCreate) -> ProjectInvoice:
