@@ -44,6 +44,7 @@ yarn-error.log
 # React
 /frontend/build
 /frontend/coverage
+/frontend/package.json
 
 # IDE
 .idea/
