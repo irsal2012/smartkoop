@@ -258,9 +258,9 @@ const projectService = {
       const projectIdNum = Number(projectId);
       
       // Ensure all numeric values are properly formatted as numbers
+      // Don't override project_id if it's already in invoiceData to avoid duplication
       const formattedData = {
         ...invoiceData,
-        project_id: projectIdNum,
         subtotal: Number(invoiceData.subtotal),
         tax_amount: Number(invoiceData.tax_amount),
         total_amount: Number(invoiceData.total_amount)
