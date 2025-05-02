@@ -82,8 +82,12 @@ const ProjectInvoiceForm = () => {
         const formattedValues = {
           ...values,
           project_id: Number(values.project_id), // Ensure project_id is a number
-          invoice_date: values.invoice_date.toISOString().split('T')[0],
-          due_date: values.due_date ? values.due_date.toISOString().split('T')[0] : null,
+          invoice_date: values.invoice_date instanceof Date ? values.invoice_date.toISOString().split('T')[0] : values.invoice_date,
+          due_date: values.due_date ? (values.due_date instanceof Date ? values.due_date.toISOString().split('T')[0] : values.due_date) : null,
+          // Ensure numeric values are properly formatted
+          subtotal: Number(values.subtotal),
+          tax_amount: Number(values.tax_amount),
+          total_amount: Number(values.total_amount)
         };
         
         let savedInvoice;

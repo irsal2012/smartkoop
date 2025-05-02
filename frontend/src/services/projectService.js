@@ -31,7 +31,14 @@ const projectService = {
 
   createProject: async (projectData) => {
     try {
-      const response = await api.post('/projects', projectData);
+      // Ensure all numeric values are properly formatted as numbers
+      const formattedData = {
+        ...projectData,
+        customer_id: Number(projectData.customer_id),
+        budget_amount: Number(projectData.budget_amount)
+      };
+      
+      const response = await api.post('/projects', formattedData);
       return response.data;
     } catch (error) {
       console.error('Error creating project:', error);
@@ -41,7 +48,14 @@ const projectService = {
 
   updateProject: async (id, projectData) => {
     try {
-      const response = await api.put(`/projects/${id}`, projectData);
+      // Ensure all numeric values are properly formatted as numbers
+      const formattedData = {
+        ...projectData,
+        customer_id: projectData.customer_id ? Number(projectData.customer_id) : undefined,
+        budget_amount: projectData.budget_amount !== undefined ? Number(projectData.budget_amount) : undefined
+      };
+      
+      const response = await api.put(`/projects/${id}`, formattedData);
       return response.data;
     } catch (error) {
       console.error(`Error updating project with ID ${id}:`, error);
@@ -86,10 +100,17 @@ const projectService = {
     try {
       // Ensure project_id is a number and matches the path parameter
       const projectIdNum = Number(projectId);
-      const response = await api.post(`/projects/${projectIdNum}/tasks`, {
+      
+      // Ensure all numeric values are properly formatted as numbers
+      const formattedData = {
         ...taskData,
-        project_id: projectIdNum
-      });
+        project_id: projectIdNum,
+        estimated_hours: Number(taskData.estimated_hours),
+        actual_hours: Number(taskData.actual_hours),
+        hourly_rate: Number(taskData.hourly_rate)
+      };
+      
+      const response = await api.post(`/projects/${projectIdNum}/tasks`, formattedData);
       return response.data;
     } catch (error) {
       console.error(`Error creating task for project with ID ${projectId}:`, error);
@@ -99,7 +120,16 @@ const projectService = {
 
   updateProjectTask: async (taskId, taskData) => {
     try {
-      const response = await api.put(`/projects/tasks/${taskId}`, taskData);
+      // Ensure all numeric values are properly formatted as numbers
+      const formattedData = {
+        ...taskData,
+        project_id: taskData.project_id ? Number(taskData.project_id) : undefined,
+        estimated_hours: taskData.estimated_hours !== undefined ? Number(taskData.estimated_hours) : undefined,
+        actual_hours: taskData.actual_hours !== undefined ? Number(taskData.actual_hours) : undefined,
+        hourly_rate: taskData.hourly_rate !== undefined ? Number(taskData.hourly_rate) : undefined
+      };
+      
+      const response = await api.put(`/projects/tasks/${taskId}`, formattedData);
       return response.data;
     } catch (error) {
       console.error(`Error updating task with ID ${taskId}:`, error);
@@ -144,10 +174,16 @@ const projectService = {
     try {
       // Ensure task_id is a number and matches the path parameter
       const taskIdNum = Number(taskId);
-      const response = await api.post(`/projects/tasks/${taskIdNum}/time-entries`, {
+      
+      // Ensure all numeric values are properly formatted as numbers
+      const formattedData = {
         ...entryData,
-        task_id: taskIdNum
-      });
+        task_id: taskIdNum,
+        member_id: Number(entryData.member_id),
+        hours: Number(entryData.hours)
+      };
+      
+      const response = await api.post(`/projects/tasks/${taskIdNum}/time-entries`, formattedData);
       return response.data;
     } catch (error) {
       console.error(`Error creating time entry for task with ID ${taskId}:`, error);
@@ -157,7 +193,15 @@ const projectService = {
 
   updateTimeEntry: async (entryId, entryData) => {
     try {
-      const response = await api.put(`/projects/time-entries/${entryId}`, entryData);
+      // Ensure all numeric values are properly formatted as numbers
+      const formattedData = {
+        ...entryData,
+        task_id: entryData.task_id ? Number(entryData.task_id) : undefined,
+        member_id: entryData.member_id ? Number(entryData.member_id) : undefined,
+        hours: entryData.hours !== undefined ? Number(entryData.hours) : undefined
+      };
+      
+      const response = await api.put(`/projects/time-entries/${entryId}`, formattedData);
       return response.data;
     } catch (error) {
       console.error(`Error updating time entry with ID ${entryId}:`, error);
@@ -212,10 +256,17 @@ const projectService = {
     try {
       // Ensure project_id is a number and matches the path parameter
       const projectIdNum = Number(projectId);
-      const response = await api.post(`/projects/${projectIdNum}/invoices`, {
+      
+      // Ensure all numeric values are properly formatted as numbers
+      const formattedData = {
         ...invoiceData,
-        project_id: projectIdNum
-      });
+        project_id: projectIdNum,
+        subtotal: Number(invoiceData.subtotal),
+        tax_amount: Number(invoiceData.tax_amount),
+        total_amount: Number(invoiceData.total_amount)
+      };
+      
+      const response = await api.post(`/projects/${projectIdNum}/invoices`, formattedData);
       return response.data;
     } catch (error) {
       console.error(`Error creating invoice for project with ID ${projectId}:`, error);
@@ -225,7 +276,16 @@ const projectService = {
 
   updateProjectInvoice: async (invoiceId, invoiceData) => {
     try {
-      const response = await api.put(`/projects/invoices/${invoiceId}`, invoiceData);
+      // Ensure all numeric values are properly formatted as numbers
+      const formattedData = {
+        ...invoiceData,
+        project_id: invoiceData.project_id ? Number(invoiceData.project_id) : undefined,
+        subtotal: invoiceData.subtotal !== undefined ? Number(invoiceData.subtotal) : undefined,
+        tax_amount: invoiceData.tax_amount !== undefined ? Number(invoiceData.tax_amount) : undefined,
+        total_amount: invoiceData.total_amount !== undefined ? Number(invoiceData.total_amount) : undefined
+      };
+      
+      const response = await api.put(`/projects/invoices/${invoiceId}`, formattedData);
       return response.data;
     } catch (error) {
       console.error(`Error updating invoice with ID ${invoiceId}:`, error);
@@ -270,10 +330,19 @@ const projectService = {
     try {
       // Ensure invoice_id is a number and matches the path parameter
       const invoiceIdNum = Number(invoiceId);
-      const response = await api.post(`/projects/invoices/${invoiceIdNum}/items`, {
+      
+      // Ensure all numeric values are properly formatted as numbers
+      const formattedData = {
         ...itemData,
-        invoice_id: invoiceIdNum
-      });
+        invoice_id: invoiceIdNum,
+        quantity: Number(itemData.quantity),
+        unit_price: Number(itemData.unit_price),
+        subtotal: Number(itemData.subtotal),
+        tax_rate: Number(itemData.tax_rate),
+        task_id: itemData.task_id ? Number(itemData.task_id) : null
+      };
+      
+      const response = await api.post(`/projects/invoices/${invoiceIdNum}/items`, formattedData);
       return response.data;
     } catch (error) {
       console.error(`Error creating item for invoice with ID ${invoiceId}:`, error);
@@ -283,7 +352,18 @@ const projectService = {
 
   updateInvoiceItem: async (itemId, itemData) => {
     try {
-      const response = await api.put(`/projects/invoice-items/${itemId}`, itemData);
+      // Ensure all numeric values are properly formatted as numbers
+      const formattedData = {
+        ...itemData,
+        invoice_id: itemData.invoice_id ? Number(itemData.invoice_id) : undefined,
+        quantity: itemData.quantity !== undefined ? Number(itemData.quantity) : undefined,
+        unit_price: itemData.unit_price !== undefined ? Number(itemData.unit_price) : undefined,
+        subtotal: itemData.subtotal !== undefined ? Number(itemData.subtotal) : undefined,
+        tax_rate: itemData.tax_rate !== undefined ? Number(itemData.tax_rate) : undefined,
+        task_id: itemData.task_id ? Number(itemData.task_id) : null
+      };
+      
+      const response = await api.put(`/projects/invoice-items/${itemId}`, formattedData);
       return response.data;
     } catch (error) {
       console.error(`Error updating invoice item with ID ${itemId}:`, error);
@@ -328,10 +408,15 @@ const projectService = {
     try {
       // Ensure invoice_id is a number and matches the path parameter
       const invoiceIdNum = Number(invoiceId);
-      const response = await api.post(`/projects/invoices/${invoiceIdNum}/payments`, {
+      
+      // Ensure all numeric values are properly formatted as numbers
+      const formattedData = {
         ...paymentData,
-        invoice_id: invoiceIdNum
-      });
+        invoice_id: invoiceIdNum,
+        amount: Number(paymentData.amount)
+      };
+      
+      const response = await api.post(`/projects/invoices/${invoiceIdNum}/payments`, formattedData);
       return response.data;
     } catch (error) {
       console.error(`Error creating payment for invoice with ID ${invoiceId}:`, error);
@@ -341,7 +426,14 @@ const projectService = {
 
   updatePayment: async (paymentId, paymentData) => {
     try {
-      const response = await api.put(`/projects/payments/${paymentId}`, paymentData);
+      // Ensure all numeric values are properly formatted as numbers
+      const formattedData = {
+        ...paymentData,
+        invoice_id: paymentData.invoice_id ? Number(paymentData.invoice_id) : undefined,
+        amount: paymentData.amount !== undefined ? Number(paymentData.amount) : undefined
+      };
+      
+      const response = await api.put(`/projects/payments/${paymentId}`, formattedData);
       return response.data;
     } catch (error) {
       console.error(`Error updating payment with ID ${paymentId}:`, error);
