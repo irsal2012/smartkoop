@@ -13,7 +13,7 @@ class MemberBase(BaseModel):
     registration_method: Optional[str] = "web"
 
 class MemberCreate(MemberBase):
-    member_id: str
+    member_id: Optional[str] = None
     join_date: Optional[date] = None
     principal_savings: Optional[Decimal] = Field(default=0, ge=0)
     mandatory_savings: Optional[Decimal] = Field(default=0, ge=0)

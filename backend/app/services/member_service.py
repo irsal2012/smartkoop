@@ -5,14 +5,18 @@ from sqlalchemy import or_
 
 from app.models.member import Member, SavingsTransaction, SHUDistribution
 from app.schemas.member import MemberCreate, MemberUpdate, SavingsTransactionCreate, SHUDistributionCreate
+from app.utils.id_generator import generate_member_id
 
 # Member CRUD operations
 def create_member(db: Session, member: MemberCreate) -> Member:
     """
     Create a new member in the database
     """
+    # Generate a member_id if not provided
+    member_id = member.member_id if member.member_id else generate_member_id(db)
+    
     db_member = Member(
-        member_id=member.member_id,
+        member_id=member_id,
         name=member.name,
         email=member.email,
         phone=member.phone,
