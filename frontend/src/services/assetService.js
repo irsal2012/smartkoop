@@ -99,6 +99,21 @@ const assetService = {
   },
 
   /**
+   * Get a single depreciation entry by ID
+   * @param {number} depreciationId - Depreciation ID
+   * @returns {Promise} - Promise with the depreciation entry data
+   */
+  getAssetDepreciation: async (depreciationId) => {
+    try {
+      const response = await api.get(`/assets/depreciations/${depreciationId}`);
+      return response.data;
+    } catch (error) {
+      console.error(`Error fetching depreciation with ID ${depreciationId}:`, error);
+      throw error;
+    }
+  },
+
+  /**
    * Create a new depreciation entry for an asset
    * @param {number} assetId - Asset ID
    * @param {Object} depreciationData - Depreciation data
@@ -159,6 +174,21 @@ const assetService = {
       return response.data;
     } catch (error) {
       console.error(`Error fetching maintenances for asset with ID ${assetId}:`, error);
+      throw error;
+    }
+  },
+
+  /**
+   * Get a single maintenance record by ID
+   * @param {number} maintenanceId - Maintenance ID
+   * @returns {Promise} - Promise with the maintenance record data
+   */
+  getAssetMaintenance: async (maintenanceId) => {
+    try {
+      const response = await api.get(`/assets/maintenances/${maintenanceId}`);
+      return response.data;
+    } catch (error) {
+      console.error(`Error fetching maintenance with ID ${maintenanceId}:`, error);
       throw error;
     }
   },

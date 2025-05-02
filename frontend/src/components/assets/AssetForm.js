@@ -132,9 +132,16 @@ const AssetForm = () => {
     try {
       setSubmitting(true);
 
+      // Format the date to YYYY-MM-DD string
+      const formatDate = (date) => {
+        const d = new Date(date);
+        return d.toISOString().split('T')[0]; // Returns YYYY-MM-DD
+      };
+
       // Format the data for API submission
       const submitData = {
         ...formData,
+        acquisition_date: formatDate(formData.acquisition_date),
         acquisition_cost: parseFloat(formData.acquisition_cost),
         current_value: parseFloat(formData.current_value),
         depreciation_rate: parseFloat(formData.depreciation_rate || 0)

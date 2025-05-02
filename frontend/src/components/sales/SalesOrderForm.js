@@ -38,7 +38,8 @@ const validationSchema = Yup.object({
   status: Yup.string().required('Status is required'),
   items: Yup.array().of(
     Yup.object().shape({
-      product_id: Yup.number().required('Product is required'),
+      product_id: Yup.mixed().required('Product is required'),
+      product_name: Yup.string(),
       quantity: Yup.number().min(1, 'Quantity must be at least 1').required('Quantity is required'),
       unit_price: Yup.number().min(0, 'Unit price must be a positive number').required('Unit price is required')
     })
@@ -84,11 +85,26 @@ const SalesOrderForm = () => {
         const taxAmount = subtotal * taxRate;
         const totalAmount = subtotal + taxAmount;
         
+        // Transform items to match backend schema
+        const transformedItems = values.items.map(item => ({
+          item_description: item.product_name || `Product ID: ${item.product_id}`,
+          quantity: item.quantity,
+          unit_price: item.unit_price,
+          subtotal: item.quantity * item.unit_price,
+          tax_rate: taxRate
+        }));
+        
         const orderData = {
-          ...values,
+          customer_id: values.customer_id,
+          order_date: values.order_date,
+          order_number: values.order_number || '',
+          status: values.status,
           subtotal,
           tax_amount: taxAmount,
-          total_amount: totalAmount
+          total_amount: totalAmount,
+          payment_status: values.payment_status || 'unpaid',
+          due_date: values.due_date,
+          items: transformedItems
         };
         
         if (isEditMode) {
@@ -136,12 +152,23 @@ const SalesOrderForm = () => {
         if (isEditMode) {
           const orderData = await salesService.getSalesOrder(id);
           
+          // Transform backend items format to frontend format
+          const transformedItems = orderData.items.map(item => ({
+            product_id: item.id || '',
+            product_name: item.item_description || '',
+            quantity: item.quantity || 1,
+            unit_price: item.unit_price || 0
+          }));
+          
           // Update form values with sales order data
           formik.setValues({
             customer_id: orderData.customer_id,
             order_date: orderData.order_date,
             status: orderData.status,
-            items: orderData.items || []
+            order_number: orderData.order_number,
+            payment_status: orderData.payment_status,
+            due_date: orderData.due_date,
+            items: transformedItems.length > 0 ? transformedItems : formik.initialValues.items
           });
         }
         

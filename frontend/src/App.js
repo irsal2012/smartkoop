@@ -56,6 +56,8 @@ import PurchaseOrderForm from './pages/purchases/PurchaseOrderForm';
 import AssetList from './pages/assets/AssetList';
 import AssetDetail from './pages/assets/AssetDetail';
 import AssetForm from './pages/assets/AssetForm';
+import AssetDepreciationForm from './pages/assets/AssetDepreciationForm';
+import AssetMaintenanceForm from './pages/assets/AssetMaintenanceForm';
 
 // Accounting pages
 import JournalEntryList from './pages/accounting/JournalEntryList';
@@ -148,6 +150,10 @@ function App() {
             <Route path="/assets/new" element={<AssetForm />} />
             <Route path="/assets/:id" element={<AssetDetail />} />
             <Route path="/assets/:id/edit" element={<AssetForm />} />
+            <Route path="/assets/:assetId/depreciations/new" element={<AssetDepreciationForm />} />
+            <Route path="/assets/:assetId/depreciations/:depreciationId/edit" element={<AssetDepreciationForm />} />
+            <Route path="/assets/:assetId/maintenances/new" element={<AssetMaintenanceForm />} />
+            <Route path="/assets/:assetId/maintenances/:maintenanceId/edit" element={<AssetMaintenanceForm />} />
             
             {/* Accounting routes */}
             <Route path="/accounting/journal" element={<JournalEntryList />} />
