@@ -52,7 +52,7 @@ const ChangePassword = () => {
         newPassword: '',
         confirmPassword: ''
       });
-      // Redirect to profile after 2 seconds
+      // Redirect to account page after 2 seconds
       setTimeout(() => {
         navigate('/profile');
       }, 2000);
@@ -72,7 +72,7 @@ const ChangePassword = () => {
       <Paper sx={{ p: 3, mt: 3 }}>
         {success && (
           <Alert severity="success" sx={{ mb: 3 }}>
-            Password changed successfully! Redirecting to profile...
+            Password changed successfully! Redirecting to account...
           </Alert>
         )}
         
@@ -121,7 +121,7 @@ const ChangePassword = () => {
               variant="outlined"
               onClick={() => navigate('/profile')}
             >
-              Cancel
+              Back to Account
             </Button>
             <Button
               type="submit"

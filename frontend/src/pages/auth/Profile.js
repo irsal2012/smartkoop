@@ -56,7 +56,7 @@ const Profile = () => {
       setCurrentUser(updatedUser);
       setSuccess(true);
     } catch (err) {
-      setError(err.response?.data?.detail || 'Failed to update profile');
+      setError(err.response?.data?.detail || 'Failed to update account information');
     } finally {
       setLoading(false);
     }
@@ -65,13 +65,13 @@ const Profile = () => {
   return (
     <Box sx={{ maxWidth: 800, mx: 'auto', py: 4 }}>
       <Typography variant="h4" gutterBottom>
-        My Profile
+        My Account
       </Typography>
       
       <Paper sx={{ p: 3, mt: 3 }}>
         {success && (
           <Alert severity="success" sx={{ mb: 3 }}>
-            Profile updated successfully!
+            Account information updated successfully!
           </Alert>
         )}
         

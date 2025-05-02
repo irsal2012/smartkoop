@@ -179,10 +179,7 @@ const MainLayout = () => {
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
           >
             <MenuItem component="a" href="/profile">
-              <Avatar /> Profile
-            </MenuItem>
-            <MenuItem component="a" href="/profile">
-              <Avatar /> My account
+              <Avatar /> My Account
             </MenuItem>
             <Divider />
             <MenuItem component="a" href="/change-password">
