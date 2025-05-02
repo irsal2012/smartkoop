@@ -32,11 +32,6 @@ import CustomerForm from './pages/customers/CustomerForm';
 import ProjectList from './pages/projects/ProjectList';
 import ProjectDetail from './pages/projects/ProjectDetail';
 import ProjectForm from './pages/projects/ProjectForm';
-// These components don't exist yet
-// import ProjectTaskList from './pages/projects/ProjectTaskList';
-// import ProjectTaskForm from './pages/projects/ProjectTaskForm';
-// import ProjectTimeEntryList from './pages/projects/ProjectTimeEntryList';
-// import ProjectTimeEntryForm from './pages/projects/ProjectTimeEntryForm';
 import ProjectInvoiceList from './pages/project-invoices/ProjectInvoiceList';
 import ProjectInvoiceDetail from './pages/project-invoices/ProjectInvoiceDetail';
 import ProjectInvoiceForm from './pages/project-invoices/ProjectInvoiceForm';
@@ -167,12 +162,6 @@ function App() {
             <Route path="/projects/new" element={<ProjectForm />} />
             <Route path="/projects/:id" element={<ProjectDetail />} />
             <Route path="/projects/:id/edit" element={<ProjectForm />} />
-            {/* These routes are commented out because the components don't exist yet */}
-            {/* <Route path="/projects/:id/tasks" element={<ProjectTaskList />} /> */}
-            {/* <Route path="/projects/:id/tasks/new" element={<ProjectTaskForm />} /> */}
-            {/* <Route path="/projects/:id/tasks/:taskId" element={<ProjectTaskForm />} /> */}
-            {/* <Route path="/projects/:id/tasks/:taskId/time-entries" element={<ProjectTimeEntryList />} /> */}
-            {/* <Route path="/projects/:id/tasks/:taskId/time-entries/new" element={<ProjectTimeEntryForm />} /> */}
             
             {/* Project Invoice routes */}
             <Route path="/project-invoices" element={<ProjectInvoiceList />} />
