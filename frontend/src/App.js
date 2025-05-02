@@ -8,6 +8,8 @@ import AuthLayout from './components/layouts/AuthLayout';
 
 // Auth pages
 import Login from './pages/auth/Login';
+import Profile from './pages/auth/Profile';
+import ChangePassword from './pages/auth/ChangePassword';
 // These pages don't exist yet
 // import Register from './pages/auth/Register';
 // import ForgotPassword from './pages/auth/ForgotPassword';
@@ -94,6 +96,10 @@ function App() {
             {/* Dashboard */}
             <Route path="/" element={<Dashboard />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            
+            {/* Profile routes */}
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/change-password" element={<ChangePassword />} />
             
             {/* Member routes */}
             <Route path="/members" element={<MemberList />} />

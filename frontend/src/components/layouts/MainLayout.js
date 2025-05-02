@@ -178,18 +178,18 @@ const MainLayout = () => {
             transformOrigin={{ horizontal: 'right', vertical: 'top' }}
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
           >
-            <MenuItem>
+            <MenuItem component="a" href="/profile">
               <Avatar /> Profile
             </MenuItem>
-            <MenuItem>
+            <MenuItem component="a" href="/profile">
               <Avatar /> My account
             </MenuItem>
             <Divider />
-            <MenuItem>
+            <MenuItem component="a" href="/change-password">
               <ListItemIcon>
                 <SettingsIcon fontSize="small" />
               </ListItemIcon>
-              Settings
+              Change Password
             </MenuItem>
             <MenuItem onClick={handleLogout}>
               <ListItemIcon>
