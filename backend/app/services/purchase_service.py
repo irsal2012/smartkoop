@@ -29,43 +29,83 @@ def create_purchase_order(db: Session, order: PurchaseOrderCreate) -> PurchaseOr
     """
     Create a new purchase order with items
     """
+    # Validate required fields
+    if not order.supplier_id:
+        raise ValueError("Supplier ID is required")
+    
+    if not order.order_date:
+        raise ValueError("Order date is required")
+    
+    if not order.status:
+        raise ValueError("Status is required")
+    
+    if not order.items or len(order.items) == 0:
+        raise ValueError("At least one item is required")
+    
     # Generate order number if not provided
     if not order.order_number:
         order_number = generate_order_number()
     else:
         order_number = order.order_number
     
+    # Validate numeric fields
+    if order.subtotal < 0:
+        raise ValueError("Subtotal cannot be negative")
+    
+    if order.tax_amount < 0:
+        raise ValueError("Tax amount cannot be negative")
+    
+    if order.total_amount < 0:
+        raise ValueError("Total amount cannot be negative")
+    
     # Create purchase order
-    db_order = PurchaseOrder(
-        supplier_id=order.supplier_id,
-        order_date=order.order_date,
-        order_number=order_number,
-        status=order.status,
-        subtotal=order.subtotal,
-        tax_amount=order.tax_amount,
-        total_amount=order.total_amount,
-        payment_status=order.payment_status,
-        due_date=order.due_date
-    )
-    db.add(db_order)
-    db.commit()
-    db.refresh(db_order)
-    
-    # Create order items
-    for item in order.items:
-        db_item = PurchaseOrderItem(
-            purchase_order_id=db_order.id,
-            item_description=item.item_description,
-            quantity=item.quantity,
-            unit_price=item.unit_price,
-            subtotal=item.subtotal,
-            tax_rate=item.tax_rate
+    try:
+        db_order = PurchaseOrder(
+            supplier_id=order.supplier_id,
+            order_date=order.order_date,
+            order_number=order_number,
+            status=order.status,
+            subtotal=order.subtotal,
+            tax_amount=order.tax_amount,
+            total_amount=order.total_amount,
+            payment_status=order.payment_status,
+            due_date=order.due_date
         )
-        db.add(db_item)
-    
-    db.commit()
-    db.refresh(db_order)
-    return db_order
+        db.add(db_order)
+        db.commit()
+        db.refresh(db_order)
+        
+        # Create order items
+        for item in order.items:
+            # Validate item fields
+            if not item.item_description:
+                raise ValueError("Item description is required")
+            
+            if item.quantity <= 0:
+                raise ValueError("Item quantity must be greater than zero")
+            
+            if item.unit_price < 0:
+                raise ValueError("Item unit price cannot be negative")
+            
+            if item.subtotal < 0:
+                raise ValueError("Item subtotal cannot be negative")
+            
+            db_item = PurchaseOrderItem(
+                purchase_order_id=db_order.id,
+                item_description=item.item_description,
+                quantity=item.quantity,
+                unit_price=item.unit_price,
+                subtotal=item.subtotal,
+                tax_rate=item.tax_rate
+            )
+            db.add(db_item)
+        
+        db.commit()
+        db.refresh(db_order)
+        return db_order
+    except Exception as e:
+        db.rollback()
+        raise ValueError(f"Failed to create purchase order: {str(e)}")
 
 def get_purchase_order(db: Session, order_id: int) -> Optional[PurchaseOrder]:
     """
@@ -111,31 +151,64 @@ def update_purchase_order(db: Session, order_id: int, order: PurchaseOrderUpdate
     Update a purchase order's information
     """
     db_order = get_purchase_order(db, order_id)
+    if not db_order:
+        raise ValueError(f"Purchase order with ID {order_id} not found")
     
-    # Update order attributes
-    for key, value in order.dict(exclude_unset=True, exclude={"items"}).items():
-        setattr(db_order, key, value)
+    # Validate numeric fields if provided
+    if order.subtotal is not None and order.subtotal < 0:
+        raise ValueError("Subtotal cannot be negative")
     
-    # Update items if provided
-    if order.items is not None:
-        # Delete existing items
-        db.query(PurchaseOrderItem).filter(PurchaseOrderItem.purchase_order_id == order_id).delete()
+    if order.tax_amount is not None and order.tax_amount < 0:
+        raise ValueError("Tax amount cannot be negative")
+    
+    if order.total_amount is not None and order.total_amount < 0:
+        raise ValueError("Total amount cannot be negative")
+    
+    try:
+        # Update order attributes
+        for key, value in order.dict(exclude_unset=True, exclude={"items"}).items():
+            setattr(db_order, key, value)
         
-        # Create new items
-        for item in order.items:
-            db_item = PurchaseOrderItem(
-                purchase_order_id=order_id,
-                item_description=item.item_description,
-                quantity=item.quantity,
-                unit_price=item.unit_price,
-                subtotal=item.subtotal,
-                tax_rate=item.tax_rate
-            )
-            db.add(db_item)
-    
-    db.commit()
-    db.refresh(db_order)
-    return db_order
+        # Update items if provided
+        if order.items is not None:
+            # Validate items
+            if len(order.items) == 0:
+                raise ValueError("At least one item is required")
+            
+            # Delete existing items
+            db.query(PurchaseOrderItem).filter(PurchaseOrderItem.purchase_order_id == order_id).delete()
+            
+            # Create new items
+            for item in order.items:
+                # Validate item fields
+                if not item.item_description:
+                    raise ValueError("Item description is required")
+                
+                if item.quantity <= 0:
+                    raise ValueError("Item quantity must be greater than zero")
+                
+                if item.unit_price < 0:
+                    raise ValueError("Item unit price cannot be negative")
+                
+                if item.subtotal < 0:
+                    raise ValueError("Item subtotal cannot be negative")
+                
+                db_item = PurchaseOrderItem(
+                    purchase_order_id=order_id,
+                    item_description=item.item_description,
+                    quantity=item.quantity,
+                    unit_price=item.unit_price,
+                    subtotal=item.subtotal,
+                    tax_rate=item.tax_rate
+                )
+                db.add(db_item)
+        
+        db.commit()
+        db.refresh(db_order)
+        return db_order
+    except Exception as e:
+        db.rollback()
+        raise ValueError(f"Failed to update purchase order: {str(e)}")
 
 def delete_purchase_order(db: Session, order_id: int) -> None:
     """

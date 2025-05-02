@@ -150,6 +150,15 @@ const PurchaseOrderForm = () => {
       setLoading(true);
       setError(null);
       
+      // Validate form data
+      if (!formData.supplier_id) {
+        throw new Error('Supplier is required');
+      }
+      
+      if (items.length === 0) {
+        throw new Error('At least one item is required');
+      }
+      
       // Calculate totals
       let subtotal = 0;
       let taxAmount = 0;
@@ -170,19 +179,30 @@ const PurchaseOrderForm = () => {
         items: items
       };
       
+      // Validate that all required fields are present
+      const requiredFields = ['supplier_id', 'order_date', 'order_number', 'status'];
+      const missingFields = requiredFields.filter(field => !purchaseOrderData[field]);
+      
+      if (missingFields.length > 0) {
+        throw new Error(`Missing required fields: ${missingFields.join(', ')}`);
+      }
+      
+      let responseId;
+      
       if (isEditMode) {
         // Update existing purchase order
-        await purchaseService.updatePurchaseOrder(id, purchaseOrderData);
+        const response = await purchaseService.updatePurchaseOrder(id, purchaseOrderData);
+        responseId = id;
       } else {
         // Create new purchase order
         const response = await purchaseService.createPurchaseOrder(purchaseOrderData);
-        id = response.id; // Set id for redirect
+        responseId = response.id; // Set id for redirect
       }
       
       setLoading(false);
       
       // Redirect to purchase order detail page
-      navigate(`/purchases/orders/${id}`);
+      navigate(`/purchases/orders/${responseId}`);
     } catch (err) {
       console.error('Error saving purchase order:', err);
       setError('Failed to save purchase order. Please try again.');

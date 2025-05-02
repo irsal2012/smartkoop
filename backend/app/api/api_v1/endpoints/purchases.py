@@ -46,7 +46,13 @@ def create_new_purchase_order(
     """
     Create a new purchase order
     """
-    return create_purchase_order(db=db, order=order)
+    try:
+        return create_purchase_order(db=db, order=order)
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"error": "Failed to create purchase order", "message": str(e)}
+        )
 
 @router.get("/orders", response_model=List[PurchaseOrderSchema])
 def read_purchase_orders(
@@ -94,7 +100,14 @@ def update_existing_purchase_order(
     db_order = get_purchase_order(db=db, order_id=order_id)
     if db_order is None:
         raise HTTPException(status_code=404, detail="Purchase order not found")
-    return update_purchase_order(db=db, order_id=order_id, order=order)
+    
+    try:
+        return update_purchase_order(db=db, order_id=order_id, order=order)
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"error": "Failed to update purchase order", "message": str(e)}
+        )
 
 @router.delete("/orders/{order_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_existing_purchase_order(
@@ -141,7 +154,13 @@ def create_new_supplier_invoice(
     if invoice.purchase_order_id != order_id:
         raise HTTPException(status_code=400, detail="Invoice purchase order ID does not match URL")
     
-    return create_supplier_invoice(db=db, invoice=invoice)
+    try:
+        return create_supplier_invoice(db=db, invoice=invoice)
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"error": "Failed to create supplier invoice", "message": str(e)}
+        )
 
 @router.get("/orders/{order_id}/invoices", response_model=List[SupplierInvoiceSchema])
 def read_supplier_invoices_for_order(
@@ -209,7 +228,13 @@ def update_supplier_invoice_by_id(
     if db_invoice is None:
         raise HTTPException(status_code=404, detail="Supplier invoice not found")
     
-    return update_supplier_invoice(db=db, invoice_id=invoice_id, invoice=invoice)
+    try:
+        return update_supplier_invoice(db=db, invoice_id=invoice_id, invoice=invoice)
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"error": "Failed to update supplier invoice", "message": str(e)}
+        )
 
 @router.put("/orders/{order_id}/invoices/{invoice_id}", response_model=SupplierInvoiceSchema)
 def update_existing_supplier_invoice(
@@ -229,7 +254,13 @@ def update_existing_supplier_invoice(
     if db_invoice is None or db_invoice.purchase_order_id != order_id:
         raise HTTPException(status_code=404, detail="Supplier invoice not found")
     
-    return update_supplier_invoice(db=db, invoice_id=invoice_id, invoice=invoice)
+    try:
+        return update_supplier_invoice(db=db, invoice_id=invoice_id, invoice=invoice)
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"error": "Failed to update supplier invoice", "message": str(e)}
+        )
 
 @router.delete("/orders/{order_id}/invoices/{invoice_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_existing_supplier_invoice(
@@ -269,7 +300,13 @@ def create_new_supplier_payment(
     if payment.invoice_id != invoice_id:
         raise HTTPException(status_code=400, detail="Payment invoice ID does not match URL")
     
-    return create_supplier_payment(db=db, payment=payment)
+    try:
+        return create_supplier_payment(db=db, payment=payment)
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"error": "Failed to create supplier payment", "message": str(e)}
+        )
 
 @router.get("/invoices/{invoice_id}/payments", response_model=List[SupplierPaymentSchema])
 def read_supplier_payments(
@@ -329,7 +366,13 @@ def update_existing_supplier_payment(
     if db_payment is None or db_payment.invoice_id != invoice_id:
         raise HTTPException(status_code=404, detail="Supplier payment not found")
     
-    return update_supplier_payment(db=db, payment_id=payment_id, payment=payment)
+    try:
+        return update_supplier_payment(db=db, payment_id=payment_id, payment=payment)
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"error": "Failed to update supplier payment", "message": str(e)}
+        )
 
 @router.delete("/invoices/{invoice_id}/payments/{payment_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_existing_supplier_payment(
