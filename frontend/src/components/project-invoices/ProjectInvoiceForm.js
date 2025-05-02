@@ -380,16 +380,15 @@ const ProjectInvoiceForm = () => {
                   label="Invoice Date"
                   value={formik.values.invoice_date}
                   onChange={(date) => formik.setFieldValue('invoice_date', date)}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      fullWidth
-                      error={formik.touched.invoice_date && Boolean(formik.errors.invoice_date)}
-                      helperText={formik.touched.invoice_date && formik.errors.invoice_date}
-                      required
-                    />
-                  )}
                   disabled={loading}
+                  slotProps={{
+                    textField: {
+                      fullWidth: true,
+                      error: formik.touched.invoice_date && Boolean(formik.errors.invoice_date),
+                      helperText: formik.touched.invoice_date && formik.errors.invoice_date,
+                      required: true
+                    }
+                  }}
                 />
               </LocalizationProvider>
             </Grid>
@@ -400,15 +399,14 @@ const ProjectInvoiceForm = () => {
                   label="Due Date"
                   value={formik.values.due_date}
                   onChange={(date) => formik.setFieldValue('due_date', date)}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      fullWidth
-                      error={formik.touched.due_date && Boolean(formik.errors.due_date)}
-                      helperText={formik.touched.due_date && formik.errors.due_date}
-                    />
-                  )}
                   disabled={loading}
+                  slotProps={{
+                    textField: {
+                      fullWidth: true,
+                      error: formik.touched.due_date && Boolean(formik.errors.due_date),
+                      helperText: formik.touched.due_date && formik.errors.due_date
+                    }
+                  }}
                 />
               </LocalizationProvider>
             </Grid>

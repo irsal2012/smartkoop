@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Box } from '@mui/material';
 
@@ -32,13 +32,14 @@ import CustomerForm from './pages/customers/CustomerForm';
 import ProjectList from './pages/projects/ProjectList';
 import ProjectDetail from './pages/projects/ProjectDetail';
 import ProjectForm from './pages/projects/ProjectForm';
-import ProjectTaskList from './pages/projects/ProjectTaskList';
-import ProjectTaskForm from './pages/projects/ProjectTaskForm';
-import ProjectTimeEntryList from './pages/projects/ProjectTimeEntryList';
-import ProjectTimeEntryForm from './pages/projects/ProjectTimeEntryForm';
-import ProjectInvoiceList from './pages/projects/ProjectInvoiceList';
-import ProjectInvoiceDetail from './pages/projects/ProjectInvoiceDetail';
-import ProjectInvoiceForm from './pages/projects/ProjectInvoiceForm';
+// These components don't exist yet
+// import ProjectTaskList from './pages/projects/ProjectTaskList';
+// import ProjectTaskForm from './pages/projects/ProjectTaskForm';
+// import ProjectTimeEntryList from './pages/projects/ProjectTimeEntryList';
+// import ProjectTimeEntryForm from './pages/projects/ProjectTimeEntryForm';
+import ProjectInvoiceList from './pages/project-invoices/ProjectInvoiceList';
+import ProjectInvoiceDetail from './pages/project-invoices/ProjectInvoiceDetail';
+import ProjectInvoiceForm from './pages/project-invoices/ProjectInvoiceForm';
 
 // Sales pages
 import SalesOrderList from './pages/sales/SalesOrderList';
@@ -166,11 +167,12 @@ function App() {
             <Route path="/projects/new" element={<ProjectForm />} />
             <Route path="/projects/:id" element={<ProjectDetail />} />
             <Route path="/projects/:id/edit" element={<ProjectForm />} />
-            <Route path="/projects/:id/tasks" element={<ProjectTaskList />} />
-            <Route path="/projects/:id/tasks/new" element={<ProjectTaskForm />} />
-            <Route path="/projects/:id/tasks/:taskId" element={<ProjectTaskForm />} />
-            <Route path="/projects/:id/tasks/:taskId/time-entries" element={<ProjectTimeEntryList />} />
-            <Route path="/projects/:id/tasks/:taskId/time-entries/new" element={<ProjectTimeEntryForm />} />
+            {/* These routes are commented out because the components don't exist yet */}
+            {/* <Route path="/projects/:id/tasks" element={<ProjectTaskList />} /> */}
+            {/* <Route path="/projects/:id/tasks/new" element={<ProjectTaskForm />} /> */}
+            {/* <Route path="/projects/:id/tasks/:taskId" element={<ProjectTaskForm />} /> */}
+            {/* <Route path="/projects/:id/tasks/:taskId/time-entries" element={<ProjectTimeEntryList />} /> */}
+            {/* <Route path="/projects/:id/tasks/:taskId/time-entries/new" element={<ProjectTimeEntryForm />} /> */}
             
             {/* Project Invoice routes */}
             <Route path="/project-invoices" element={<ProjectInvoiceList />} />
