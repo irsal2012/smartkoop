@@ -27,6 +27,19 @@ import CustomerList from './pages/customers/CustomerList';
 import CustomerDetail from './pages/customers/CustomerDetail';
 import CustomerForm from './pages/customers/CustomerForm';
 
+// Project pages
+// These components will be created later
+import ProjectList from './pages/projects/ProjectList';
+import ProjectDetail from './pages/projects/ProjectDetail';
+import ProjectForm from './pages/projects/ProjectForm';
+import ProjectTaskList from './pages/projects/ProjectTaskList';
+import ProjectTaskForm from './pages/projects/ProjectTaskForm';
+import ProjectTimeEntryList from './pages/projects/ProjectTimeEntryList';
+import ProjectTimeEntryForm from './pages/projects/ProjectTimeEntryForm';
+import ProjectInvoiceList from './pages/projects/ProjectInvoiceList';
+import ProjectInvoiceDetail from './pages/projects/ProjectInvoiceDetail';
+import ProjectInvoiceForm from './pages/projects/ProjectInvoiceForm';
+
 // Sales pages
 import SalesOrderList from './pages/sales/SalesOrderList';
 import SalesOrderDetail from './pages/sales/SalesOrderDetail';
@@ -147,6 +160,23 @@ function App() {
             <Route path="/accounting/journal/:id/edit" element={<JournalEntryForm />} />
             <Route path="/accounting/chart-of-accounts" element={<ChartOfAccounts />} />
             <Route path="/accounting/reports" element={<FinancialReports />} />
+            
+            {/* Project routes */}
+            <Route path="/projects" element={<ProjectList />} />
+            <Route path="/projects/new" element={<ProjectForm />} />
+            <Route path="/projects/:id" element={<ProjectDetail />} />
+            <Route path="/projects/:id/edit" element={<ProjectForm />} />
+            <Route path="/projects/:id/tasks" element={<ProjectTaskList />} />
+            <Route path="/projects/:id/tasks/new" element={<ProjectTaskForm />} />
+            <Route path="/projects/:id/tasks/:taskId" element={<ProjectTaskForm />} />
+            <Route path="/projects/:id/tasks/:taskId/time-entries" element={<ProjectTimeEntryList />} />
+            <Route path="/projects/:id/tasks/:taskId/time-entries/new" element={<ProjectTimeEntryForm />} />
+            
+            {/* Project Invoice routes */}
+            <Route path="/project-invoices" element={<ProjectInvoiceList />} />
+            <Route path="/project-invoices/new" element={<ProjectInvoiceForm />} />
+            <Route path="/project-invoices/:id" element={<ProjectInvoiceDetail />} />
+            <Route path="/project-invoices/:id/edit" element={<ProjectInvoiceForm />} />
             
             {/* Document routes */}
             <Route path="/documents" element={<DocumentList />} />

@@ -33,6 +33,7 @@ class Member(Base, BaseModel):
     # Relationships
     savings_transactions = relationship("SavingsTransaction", back_populates="member")
     shu_distributions = relationship("SHUDistribution", back_populates="member")
+    time_entries = relationship("ProjectTimeEntry", back_populates="member")
 
 
 class SavingsTransaction(Base, BaseModel):

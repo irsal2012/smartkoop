@@ -33,6 +33,8 @@ import {
   Logout as LogoutIcon,
   Person as PersonIcon,
   PointOfSale as PointOfSaleIcon,
+  Assignment as AssignmentIcon,
+  Receipt as ReceiptIcon,
 } from '@mui/icons-material';
 import { useAuth } from '../../context/AuthContext';
 
@@ -44,11 +46,13 @@ const mainNavItems = [
   { text: 'Dashboard', icon: <DashboardIcon />, path: '/dashboard' },
   { text: 'Members', icon: <PeopleIcon />, path: '/members' },
   { text: 'Customers', icon: <BusinessIcon />, path: '/customers' },
+  { text: 'Projects', icon: <AssignmentIcon />, path: '/projects' },
   { text: 'Sales', icon: <PointOfSaleIcon />, path: '/sales/orders' },
   { text: 'Suppliers', icon: <LocalShippingIcon />, path: '/suppliers' },
   { text: 'Purchases', icon: <ShoppingCartIcon />, path: '/purchases/orders' },
   { text: 'Assets', icon: <InventoryIcon />, path: '/assets' },
   { text: 'Accounting', icon: <AccountBalanceIcon />, path: '/accounting/journal' },
+  { text: 'Project Invoices', icon: <ReceiptIcon />, path: '/project-invoices' },
   { text: 'Documents', icon: <DescriptionIcon />, path: '/documents' },
 ];
 

@@ -21,6 +21,7 @@ class Customer(Base, BaseModel):
     
     # Relationships
     sales_orders = relationship("SalesOrder", back_populates="customer")
+    projects = relationship("Project", back_populates="customer")
 
 
 class Supplier(Base, BaseModel):
