@@ -49,7 +49,7 @@ const MemberForm = () => {
       phone: '',
       address: '',
       join_date: new Date().toISOString().split('T')[0], // Today's date in YYYY-MM-DD format
-      status: 'active',
+      status: 'calon_anggota',
       registration_method: 'web',
       principal_savings: 0,
       mandatory_savings: 0,
@@ -104,7 +104,7 @@ const MemberForm = () => {
             phone: data.phone || '',
             address: data.address || '',
             join_date: data.join_date ? new Date(data.join_date).toISOString().split('T')[0] : '',
-            status: data.status || 'active',
+            status: data.status || 'calon_anggota',
             registration_method: data.registration_method || 'web',
             principal_savings: data.principal_savings || 0,
             mandatory_savings: data.mandatory_savings || 0,
@@ -252,7 +252,9 @@ const MemberForm = () => {
                   error={formik.touched.status && Boolean(formik.errors.status)}
                   label="Status"
                 >
-                  <MenuItem value="active">Active</MenuItem>
+                  <MenuItem value="calon_anggota">Calon Anggota</MenuItem>
+                  <MenuItem value="anggota">Anggota</MenuItem>
+                  <MenuItem value="pengurus">Pengurus</MenuItem>
                   <MenuItem value="inactive">Inactive</MenuItem>
                   <MenuItem value="suspended">Suspended</MenuItem>
                 </Select>

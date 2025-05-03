@@ -14,7 +14,7 @@ class Member(Base, BaseModel):
     phone = Column(String, nullable=True)
     address = Column(Text, nullable=True)
     join_date = Column(Date, default=date.today, nullable=False)
-    status = Column(String, default="active")  # active, inactive, suspended
+    status = Column(String, default="calon_anggota")  # calon_anggota, anggota, pengurus, inactive, suspended
     
     # Savings information
     principal_savings = Column(Numeric(precision=10, scale=2), default=0.0)

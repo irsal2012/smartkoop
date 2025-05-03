@@ -9,7 +9,7 @@ class MemberBase(BaseModel):
     email: Optional[EmailStr] = None
     phone: Optional[str] = None
     address: Optional[str] = None
-    status: Optional[str] = "active"
+    status: Optional[str] = "calon_anggota"
     registration_method: Optional[str] = "web"
 
 class MemberCreate(MemberBase):

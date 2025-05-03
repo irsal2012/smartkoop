@@ -173,8 +173,14 @@ const MemberDetail = () => {
     let color = 'default';
     
     switch (status) {
-      case 'active':
+      case 'calon_anggota':
+        color = 'info';
+        break;
+      case 'anggota':
         color = 'success';
+        break;
+      case 'pengurus':
+        color = 'primary';
         break;
       case 'inactive':
         color = 'error';
@@ -186,9 +192,15 @@ const MemberDetail = () => {
         color = 'default';
     }
     
+    // Format the display text (capitalize and replace underscores with spaces)
+    const displayText = status
+      .split('_')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+    
     return (
       <Chip 
-        label={status.charAt(0).toUpperCase() + status.slice(1)} 
+        label={displayText} 
         color={color} 
         size="small" 
       />
